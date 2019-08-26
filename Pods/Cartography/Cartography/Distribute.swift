@@ -19,10 +19,10 @@
 
     if let first = items.first {
         let rest = items.dropFirst()
-        
+
         return rest.reduce(([], first)) { (acc, current) -> ([NSLayoutConstraint], T) in
             let (constraints, previous) = acc
-            
+
             return (constraints + [ combine(previous, current) ], current)
         }.0
     } else {

@@ -9,15 +9,15 @@ public class PhotoDetailInteractiveDismissTransition: NSObject {
     fileprivate weak var toDelegate: PhotoDetailTransitionAnimatorDelegate?
 
     /// The background animation is the "photo-detail background opacity goes to zero"
-    fileprivate var backgroundAnimation: UIViewPropertyAnimator? = nil
+    fileprivate var backgroundAnimation: UIViewPropertyAnimator?
 
     // NOTE: To avoid writing tons of boilerplate that pulls these values out of
     // the transitionContext, I'm just gonna cache them here.
-    fileprivate var transitionContext: UIViewControllerContextTransitioning? = nil
-    fileprivate var fromReferenceImageViewFrame: CGRect? = nil
-    fileprivate var toReferenceImageViewFrame: CGRect? = nil
-    fileprivate weak var fromVC: PhotoDetailViewController? = nil
-    fileprivate weak var toVC: UIViewController? = nil
+    fileprivate var transitionContext: UIViewControllerContextTransitioning?
+    fileprivate var fromReferenceImageViewFrame: CGRect?
+    fileprivate var toReferenceImageViewFrame: CGRect?
+    fileprivate weak var fromVC: PhotoDetailViewController?
+    fileprivate weak var toVC: UIViewController?
 
     /// The snapshotView that is animating between the two view controllers.
     fileprivate let transitionImageView: UIImageView = {
@@ -111,7 +111,7 @@ public class PhotoDetailInteractiveDismissTransition: NSObject {
 
         // When the transition-image has moved into place, the animation completes,
         // and we close out the transition itself.
-        foregroundAnimation.addCompletion { [weak self] (position) in
+        foregroundAnimation.addCompletion { [weak self] (_) in
             self?.transitionImageView.removeFromSuperview()
             self?.transitionImageView.image = nil
             self?.toDelegate?.transitionDidEnd()

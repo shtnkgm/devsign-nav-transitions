@@ -12,7 +12,7 @@ import UIKit
 import AppKit
 #endif
 
-public struct Size : Compound, RelativeCompoundEquality, RelativeCompoundInequality {
+public struct Size: Compound, RelativeCompoundEquality, RelativeCompoundInequality {
     public let context: Context
     public let properties: [Property]
 

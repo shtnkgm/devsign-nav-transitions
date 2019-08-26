@@ -79,5 +79,4 @@ public class PhotoGridCell: UICollectionViewCell {
         self.imageView.image = image
     }
 
-
 }

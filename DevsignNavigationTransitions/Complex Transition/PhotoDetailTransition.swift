@@ -107,7 +107,6 @@ public class PhotoDetailPushTransition: NSObject, UIViewControllerAnimatedTransi
     }
 }
 
-
 public class PhotoDetailPopTransition: NSObject, UIViewControllerAnimatedTransitioning {
     fileprivate let toDelegate: PhotoDetailTransitionAnimatorDelegate
     fileprivate let photoDetailVC: PhotoDetailViewController

@@ -19,7 +19,7 @@ private func makeEqual<P: RelativeEquality, T: LayoutProxy>(by attribute: (T) ->
         }
 
         let rest = items.dropFirst()
-        
+
         return rest.reduce([]) { acc, current in
             if let current = current as? AutoresizingMaskLayoutProxy {
                 current.translatesAutoresizingMaskIntoConstraints = false

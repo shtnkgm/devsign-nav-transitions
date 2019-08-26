@@ -25,10 +25,10 @@ class PhotoDetailViewController: UIViewController {
             targetSize: self.view.bounds.size.pixelSize,
             contentMode: .aspectFit,
             options: imageRequestOptions
-        ) { (image, info) in
+        ) { (image, _) in
             self.imageView.image = image
         }
-        
+
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -48,12 +48,9 @@ class PhotoDetailViewController: UIViewController {
         self.configureDismissGesture()
     }
 
-
-    // MARK: Drag-to-dismiss
-
     private let dismissPanGesture = UIPanGestureRecognizer()
     public var isInteractivelyDismissing: Bool = false
-    public weak var transitionController: PhotoDetailInteractiveDismissTransition? = nil
+    public weak var transitionController: PhotoDetailInteractiveDismissTransition?
 
     private func configureDismissGesture() {
         self.view.addGestureRecognizer(self.dismissPanGesture)

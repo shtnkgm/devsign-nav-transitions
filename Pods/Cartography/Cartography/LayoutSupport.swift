@@ -12,7 +12,7 @@ import Foundation
     import UIKit
 
     public final class LayoutSupport: LayoutItem {
-        let layoutGuide : UILayoutSupport
+        let layoutGuide: UILayoutSupport
 
         init(layoutGuide: UILayoutSupport) {
             self.layoutGuide = layoutGuide
@@ -24,13 +24,13 @@ import Foundation
     }
 
     public extension UIViewController {
-        public var car_topLayoutGuide : LayoutSupport {
+        public var car_topLayoutGuide: LayoutSupport {
             get {
                 return LayoutSupport(layoutGuide: self.topLayoutGuide)
             }
         }
-        
-        public var car_bottomLayoutGuide : LayoutSupport {
+
+        public var car_bottomLayoutGuide: LayoutSupport {
             get {
                 return LayoutSupport(layoutGuide: self.bottomLayoutGuide)
             }

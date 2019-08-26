@@ -6,7 +6,7 @@ class PhotoGridViewController: UIViewController {
     private let collectionView: UICollectionView
     private let collectionViewLayout: UICollectionViewFlowLayout
 
-    fileprivate var lastSelectedIndexPath: IndexPath? = nil
+    fileprivate var lastSelectedIndexPath: IndexPath?
 
     private let fetchResult: PHFetchResult<PHAsset>
     fileprivate let imageManager = PHCachingImageManager()
@@ -81,7 +81,7 @@ extension PhotoGridViewController: UICollectionViewDataSource {
             targetSize: self.collectionViewLayout.itemSize.pixelSize,
             contentMode: .aspectFill,
             options: self.imageRequestOptions
-        ) { (image, info) in
+        ) { (image, _) in
             cell.setImage(image: image, fromAsset: asset)
         }
         return cell

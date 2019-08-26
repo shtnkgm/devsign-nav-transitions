@@ -1,15 +1,14 @@
 import UIKit
 
-/// Adds support for custom navigation transitions
+/// カスタムナビゲーション遷移のサポートを追加
 public class LocketNavigationController: UINavigationController {
-    fileprivate var currentAnimationTransition: UIViewControllerAnimatedTransitioning? = nil
+    fileprivate var currentAnimationTransition: UIViewControllerAnimatedTransitioning?
 
     public override func viewDidLoad() {
         super.viewDidLoad()
         self.delegate = self
     }
 
-    /// The tab bar should be hidden if a PhotoDetailVC is anywhere in the stack.
     public var shouldTabBarBeHidden: Bool {
         let photoDetailInNavStack = self.viewControllers.contains(where: { (vc) -> Bool in
             return vc.isKind(of: PhotoDetailViewController.self)
@@ -71,4 +70,3 @@ extension LocketNavigationController: UINavigationControllerDelegate {
         self.currentAnimationTransition = nil
     }
 }
-
