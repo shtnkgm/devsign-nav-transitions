@@ -1,11 +1,3 @@
-//
-//  PhotoDetailInteractiveDismissTransition.swift
-//  DevsignNavigationTransitions
-//
-//  Created by Bryan Clark on 5/23/19.
-//  Copyright © 2019 Bryan Clark. All rights reserved.
-//
-
 import UIKit
 
 /// Manages the interactive transition animation for the drag-to-dismiss gesture

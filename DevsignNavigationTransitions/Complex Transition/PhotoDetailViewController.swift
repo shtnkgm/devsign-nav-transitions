@@ -1,11 +1,3 @@
-//
-//  PhotoDetailViewController.swift
-//  DevsignNavigationTransitions
-//
-//  Created by Bryan Clark on 5/20/19.
-//  Copyright © 2019 Bryan Clark. All rights reserved.
-//
-
 import UIKit
 import Cartography
 import Photos
@@ -69,7 +61,7 @@ class PhotoDetailViewController: UIViewController {
     }
 
     @objc private func dismissPanGestureDidChange(_ gesture: UIPanGestureRecognizer) {
-        // Decide whether we're interactively-dismissing, and notify our navigation controller.
+        // インタラクティブに却下するかどうかを決定し、Navigation Controllerに通知します。
         switch gesture.state {
         case .began:
             self.isInteractivelyDismissing = true
@@ -82,7 +74,7 @@ class PhotoDetailViewController: UIViewController {
             break
         }
 
-        // We want to update our transition controller, too!
+        // 画面遷移コントローラーも更新したい！
         self.transitionController?.didPanWith(gestureRecognizer: gesture)
     }
 }

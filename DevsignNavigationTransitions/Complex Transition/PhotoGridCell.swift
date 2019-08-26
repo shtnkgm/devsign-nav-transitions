@@ -1,11 +1,3 @@
-//
-//  PhotoGridCell.swift
-//  Locket
-//
-//  Created by Bryan Clark on 6/10/18.
-//  Copyright © 2018 Bryan Clark. All rights reserved.
-//
-
 import UIKit
 import Photos
 
