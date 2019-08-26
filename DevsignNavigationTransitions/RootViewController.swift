@@ -29,9 +29,6 @@ class RootViewController: UIViewController {
 		self.tabController.view.frame = self.view.bounds
 		self.tabController.view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
 
-		let firstNavController = UINavigationController(rootViewController: OnThisDayViewController())
-		self.tabController.addChild(firstNavController)
-
 		let secondNavController = LocketNavigationController(rootViewController: PhotoGridViewController())
 		self.tabController.addChild(secondNavController)
     }

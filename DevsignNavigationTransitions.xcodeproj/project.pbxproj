@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -19,9 +19,7 @@
 		937031202281E44B00A930D8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9370311F2281E44B00A930D8 /* AppDelegate.swift */; };
 		9370312A2281E44C00A930D8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 937031282281E44C00A930D8 /* LaunchScreen.storyboard */; };
 		937031322281E48C00A930D8 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 937031312281E48C00A930D8 /* RootViewController.swift */; };
-		937031342281E51800A930D8 /* OnThisDayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 937031332281E51800A930D8 /* OnThisDayViewController.swift */; };
 		937031362281E53A00A930D8 /* PhotoGridViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 937031352281E53A00A930D8 /* PhotoGridViewController.swift */; };
-		9370313A2281EB4100A930D8 /* ModalCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 937031392281EB4100A930D8 /* ModalCardViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,9 +39,7 @@
 		937031292281E44C00A930D8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9370312B2281E44C00A930D8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		937031312281E48C00A930D8 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
-		937031332281E51800A930D8 /* OnThisDayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnThisDayViewController.swift; sourceTree = "<group>"; };
 		937031352281E53A00A930D8 /* PhotoGridViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoGridViewController.swift; sourceTree = "<group>"; };
-		937031392281EB4100A930D8 /* ModalCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalCardViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,7 +85,6 @@
 			children = (
 				9370311F2281E44B00A930D8 /* AppDelegate.swift */,
 				937031312281E48C00A930D8 /* RootViewController.swift */,
-				937031382281E91100A930D8 /* Simple Transition */,
 				937031372281E90600A930D8 /* Complex Transition */,
 				932EA9D822970C85006BF679 /* Interactive Transition */,
 				937031282281E44C00A930D8 /* LaunchScreen.storyboard */,
@@ -111,15 +106,6 @@
 				93544E3F2294A83300DA8B0A /* CG Helpers.swift */,
 			);
 			path = "Complex Transition";
-			sourceTree = "<group>";
-		};
-		937031382281E91100A930D8 /* Simple Transition */ = {
-			isa = PBXGroup;
-			children = (
-				937031332281E51800A930D8 /* OnThisDayViewController.swift */,
-				937031392281EB4100A930D8 /* ModalCardViewController.swift */,
-			);
-			path = "Simple Transition";
 			sourceTree = "<group>";
 		};
 		9BA25886E88F74952F0525A1 /* Frameworks */ = {
@@ -213,22 +199,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-DevsignNavigationTransitions/Pods-DevsignNavigationTransitions-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Cartography/Cartography.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftTweaks/SwiftTweaks.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-DevsignNavigationTransitions/Pods-DevsignNavigationTransitions-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Cartography.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftTweaks.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-DevsignNavigationTransitions/Pods-DevsignNavigationTransitions-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DevsignNavigationTransitions/Pods-DevsignNavigationTransitions-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DevsignNavigationTransitions/Pods-DevsignNavigationTransitions-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		B1A6D58E93E5466EEA5F99EF /* [CP] Check Pods Manifest.lock */ = {
@@ -261,7 +240,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				937031362281E53A00A930D8 /* PhotoGridViewController.swift in Sources */,
-				9370313A2281EB4100A930D8 /* ModalCardViewController.swift in Sources */,
 				932EA9DA22970C9E006BF679 /* PhotoDetailInteractiveDismissTransition.swift in Sources */,
 				9312A4E32293682F00F7E9B9 /* PhotoDetailTransition.swift in Sources */,
 				937031202281E44B00A930D8 /* AppDelegate.swift in Sources */,
@@ -269,7 +247,6 @@
 				9312A4E1229367FF00F7E9B9 /* PhotoDetailViewController.swift in Sources */,
 				9312A4E52293687400F7E9B9 /* LocketTabBarController.swift in Sources */,
 				93544E402294A83300DA8B0A /* CG Helpers.swift in Sources */,
-				937031342281E51800A930D8 /* OnThisDayViewController.swift in Sources */,
 				9312A4DF229367A600F7E9B9 /* LocketNavigationController.swift in Sources */,
 				937031322281E48C00A930D8 /* RootViewController.swift in Sources */,
 			);
