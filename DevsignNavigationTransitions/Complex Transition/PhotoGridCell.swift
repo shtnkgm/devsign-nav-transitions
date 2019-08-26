@@ -1,5 +1,5 @@
-import UIKit
 import Photos
+import UIKit
 
 public class PhotoGridCell: UICollectionViewCell {
     static let identifier = "PhotoGridCell"
@@ -8,54 +8,54 @@ public class PhotoGridCell: UICollectionViewCell {
     private let selectedView: UIView
 
     public override init(frame: CGRect) {
-        self.selectedView = UIView()
+        selectedView = UIView()
 
         super.init(frame: frame)
 
-        self.selectedView.backgroundColor = UIColor.black.withAlphaComponent(0.3)
-        self.selectedView.isHidden = true
+        selectedView.backgroundColor = UIColor.black.withAlphaComponent(0.3)
+        selectedView.isHidden = true
 
-        self.accessibilityIgnoresInvertColors = true
+        accessibilityIgnoresInvertColors = true
 
-        self.contentView.addSubview(imageView)
-        self.imageView.contentMode = .scaleAspectFill
-        self.imageView.accessibilityIgnoresInvertColors = true
-        self.imageView.clipsToBounds = true
+        contentView.addSubview(imageView)
+        imageView.contentMode = .scaleAspectFill
+        imageView.accessibilityIgnoresInvertColors = true
+        imageView.clipsToBounds = true
 
-        self.contentView.addSubview(self.selectedView)
-        self.contentView.bringSubviewToFront(self.selectedView)
+        contentView.addSubview(selectedView)
+        contentView.bringSubviewToFront(selectedView)
 
-        self.isAccessibilityElement = true
+        isAccessibilityElement = true
     }
 
-    required public init?(coder aDecoder: NSCoder) {
+    public required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
     public override func prepareForReuse() {
         super.prepareForReuse()
-        self.isHidden = false
-        self.imageView.image = nil
+        isHidden = false
+        imageView.image = nil
     }
 
     public override func layoutSubviews() {
         super.layoutSubviews()
 
-        self.imageView.frame = self.contentView.bounds
-        self.selectedView.frame = self.contentView.bounds
+        imageView.frame = contentView.bounds
+        selectedView.frame = contentView.bounds
     }
 
     public var image: UIImage? {
-        return self.imageView.image
+        return imageView.image
     }
 
     public func setHighlighted(_ highlighted: Bool) {
-        self.selectedView.isHidden = !highlighted
+        selectedView.isHidden = !highlighted
     }
 
-    public var asset: PHAsset? = nil {
+    public var asset: PHAsset? {
         didSet {
-            self.setImage(image: nil, fromAsset: asset)
+            setImage(image: nil, fromAsset: asset)
         }
     }
 
@@ -65,8 +65,8 @@ public class PhotoGridCell: UICollectionViewCell {
             let asset = self.asset,
             let fromAsset = fromAsset
         else {
-                self.imageView.image = nil
-                return
+            imageView.image = nil
+            return
         }
 
         // If it's just that the IDs mismatch,
@@ -76,7 +76,6 @@ public class PhotoGridCell: UICollectionViewCell {
             return
         }
 
-        self.imageView.image = image
+        imageView.image = image
     }
-
 }

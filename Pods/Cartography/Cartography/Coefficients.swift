@@ -15,7 +15,7 @@ public struct Coefficients {
     var multiplier: CGFloat = 1
     var constant: CGFloat = 0
 
-    init() { }
+    init() {}
 
     init(_ multiplier: CGFloat, _ constant: CGFloat) {
         self.constant = constant

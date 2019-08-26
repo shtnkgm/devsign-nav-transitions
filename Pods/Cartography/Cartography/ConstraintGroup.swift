@@ -26,9 +26,7 @@ public class ConstraintGroup {
         }
     }
 
-    public init() {
-
-    }
+    public init() {}
 
     internal func replaceConstraints(_ constraints: [Constraint]) {
         for constraint in self.constraints {

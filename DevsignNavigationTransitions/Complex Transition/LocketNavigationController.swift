@@ -6,16 +6,16 @@ public class LocketNavigationController: UINavigationController {
 
     public override func viewDidLoad() {
         super.viewDidLoad()
-        self.delegate = self
+        delegate = self
     }
 
     public var shouldTabBarBeHidden: Bool {
-        let photoDetailInNavStack = self.viewControllers.contains(where: { (vc) -> Bool in
-            return vc.isKind(of: PhotoDetailViewController.self)
+        let photoDetailInNavStack = viewControllers.contains(where: { (vc) -> Bool in
+            vc.isKind(of: PhotoDetailViewController.self)
         })
 
         let isPoppingFromPhotoDetail =
-            (self.currentAnimationTransition?.isKind(of: PhotoDetailPopTransition.self) ?? false)
+            (currentAnimationTransition?.isKind(of: PhotoDetailPopTransition.self) ?? false)
 
         if isPoppingFromPhotoDetail {
             return false
@@ -27,22 +27,19 @@ public class LocketNavigationController: UINavigationController {
 
 extension LocketNavigationController: UINavigationControllerDelegate {
     public func navigationController(
-        _ navigationController: UINavigationController,
+        _: UINavigationController,
         animationControllerFor operation: UINavigationController.Operation,
         from fromVC: UIViewController,
         to toVC: UIViewController
-        ) -> UIViewControllerAnimatedTransitioning? {
-
+    ) -> UIViewControllerAnimatedTransitioning? {
         let result: UIViewControllerAnimatedTransitioning?
         if
             let photoDetailVC = toVC as? PhotoDetailViewController,
-            operation == .push
-        {
+            operation == .push {
             result = PhotoDetailPushTransition(fromDelegate: fromVC, toPhotoDetailVC: photoDetailVC)
         } else if
             let photoDetailVC = fromVC as? PhotoDetailViewController,
-            operation == .pop
-        {
+            operation == .pop {
             if photoDetailVC.isInteractivelyDismissing {
                 result = PhotoDetailInteractiveDismissTransition(fromDelegate: photoDetailVC, toDelegate: toVC)
             } else {
@@ -51,22 +48,22 @@ extension LocketNavigationController: UINavigationControllerDelegate {
         } else {
             result = nil
         }
-        self.currentAnimationTransition = result
+        currentAnimationTransition = result
         return result
     }
 
     public func navigationController(
-        _ navigationController: UINavigationController,
-        interactionControllerFor animationController: UIViewControllerAnimatedTransitioning
+        _: UINavigationController,
+        interactionControllerFor _: UIViewControllerAnimatedTransitioning
     ) -> UIViewControllerInteractiveTransitioning? {
-        return self.currentAnimationTransition as? UIViewControllerInteractiveTransitioning
+        return currentAnimationTransition as? UIViewControllerInteractiveTransitioning
     }
 
     public func navigationController(
-        _ navigationController: UINavigationController,
-        didShow viewController: UIViewController,
-        animated: Bool
+        _: UINavigationController,
+        didShow _: UIViewController,
+        animated _: Bool
     ) {
-        self.currentAnimationTransition = nil
+        currentAnimationTransition = nil
     }
 }

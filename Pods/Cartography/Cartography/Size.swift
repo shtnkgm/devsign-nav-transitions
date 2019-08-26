@@ -7,9 +7,9 @@
 //
 
 #if os(iOS) || os(tvOS)
-import UIKit
+    import UIKit
 #else
-import AppKit
+    import AppKit
 #endif
 
 public struct Size: Compound, RelativeCompoundEquality, RelativeCompoundInequality {
@@ -33,7 +33,7 @@ public func * (lhs: Expression<Size>, rhs: CGFloat) -> Expression<Size> {
 }
 
 public func * (m: CGFloat, rhs: Size) -> Expression<Size> {
-    return Expression(rhs, [ Coefficients(m, 0), Coefficients(m, 0) ])
+    return Expression(rhs, [Coefficients(m, 0), Coefficients(m, 0)])
 }
 
 public func * (lhs: Size, rhs: CGFloat) -> Expression<Size> {

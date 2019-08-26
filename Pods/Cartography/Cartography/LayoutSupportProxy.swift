@@ -7,19 +7,19 @@
 //
 
 #if os(iOS) || os(tvOS)
-import UIKit
+    import UIKit
 
-public final class LayoutSupportProxy: SupportsHeightLayoutProxy, SupportsTopLayoutProxy, SupportsBottomLayoutProxy {
-    public let context: Context
+    public final class LayoutSupportProxy: SupportsHeightLayoutProxy, SupportsTopLayoutProxy, SupportsBottomLayoutProxy {
+        public let context: Context
 
-    private let layoutGuide: UILayoutSupport
-    public var item: AnyObject {
-        return layoutGuide
+        private let layoutGuide: UILayoutSupport
+        public var item: AnyObject {
+            return layoutGuide
+        }
+
+        public init(context: Context, item: LayoutSupport) {
+            self.context = context
+            layoutGuide = item.layoutGuide
+        }
     }
-
-    public init(context: Context, item: LayoutSupport) {
-        self.context = context
-        self.layoutGuide = item.layoutGuide
-    }
-}
 #endif

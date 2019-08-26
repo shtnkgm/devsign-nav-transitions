@@ -1,20 +1,20 @@
 import UIKit
 
 /** A custom tab-bar-controller that:
-- requires that its viewControllers be LocketNavigationControllers,
-- keeps its tab bar hidden appropriately
-- animates its tab bar in/out nicely
-**/
+ - requires that its viewControllers be LocketNavigationControllers,
+ - keeps its tab bar hidden appropriately
+ - animates its tab bar in/out nicely
+ **/
 public class LocketTabBarController: UITabBarController {
     public var isTabBarHidden: Bool = false
 
     public var shouldTabBarBeSuppressed: Bool {
         guard
             let currentLocketNavigationController = self.selectedViewController as? LocketNavigationController
-            else {
-                fatalError()
+        else {
+            fatalError()
         }
-        return  currentLocketNavigationController.shouldTabBarBeHidden
+        return currentLocketNavigationController.shouldTabBarBeHidden
     }
 
     public override var viewControllers: [UIViewController]? {
@@ -30,20 +30,20 @@ public class LocketTabBarController: UITabBarController {
 // via https://www.iamsim.me/hiding-the-uitabbar-of-a-uitabbarcontroller/
 extension LocketTabBarController {
     /**
-    Show or hide the tab bar.
-    */
+     Show or hide the tab bar.
+     */
     func setTabBar(
         hidden: Bool,
         animated: Bool = true,
         alongside animator: UIViewPropertyAnimator? = nil
-        ) {
+    ) {
         // We don't show the tab bar if the navigation state of the current tab disallows it.
-        if !hidden, self.shouldTabBarBeSuppressed {
+        if !hidden, shouldTabBarBeSuppressed {
             return
         }
 
         guard isTabBarOffscreen != hidden else { return }
-        self.isTabBarHidden = hidden
+        isTabBarHidden = hidden
 
         let offsetY = hidden ? tabBar.frame.height : -tabBar.frame.height
         let endFrame = tabBar.frame.offsetBy(dx: 0, dy: offsetY)
@@ -61,38 +61,36 @@ extension LocketTabBarController {
         // Update safe area insets for the current view controller before the animation takes place when hiding the bar.
         if
             hidden,
-            let insets = newInsets
-        {
+            let insets = newInsets {
             set(childViewController: vc, additionalSafeArea: insets)
         }
 
         guard animated else {
             tabBar.frame = endFrame
-            tabBar.isHidden = self.isTabBarHidden
+            tabBar.isHidden = isTabBarHidden
             return
         }
 
         /// If the tab bar was previously hidden, we need to un-hide it.
-        if self.tabBar.isHidden, !hidden {
-            self.tabBar.isHidden = false
+        if tabBar.isHidden, !hidden {
+            tabBar.isHidden = false
         }
 
         // Perform animation with coordination if one is given. Update safe area insets _after_ the animation is complete,
         // if we're showing the tab bar.
-        weak var tabBarRef = self.tabBar
+        weak var tabBarRef = tabBar
         if let animator = animator {
             animator.addAnimations {
                 tabBarRef?.frame = endFrame
             }
-            animator.addCompletion { (position) in
+            animator.addCompletion { position in
                 let insets = (position == .end) ? newInsets : originalInsets
                 if
                     !hidden,
-                    let insets = insets
-                {
+                    let insets = insets {
                     set(childViewController: vc, additionalSafeArea: insets)
                 }
-                if (position == .end) {
+                if position == .end {
                     tabBarRef?.isHidden = hidden
                 }
             }
@@ -116,10 +114,10 @@ extension LocketTabBarController {
 
 public extension UIViewController {
     var locketNavigationController: LocketNavigationController? {
-        return self.navigationController as? LocketNavigationController
+        return navigationController as? LocketNavigationController
     }
 
     var locketTabBarController: LocketTabBarController? {
-        return self.tabBarController as? LocketTabBarController
+        return tabBarController as? LocketTabBarController
     }
 }

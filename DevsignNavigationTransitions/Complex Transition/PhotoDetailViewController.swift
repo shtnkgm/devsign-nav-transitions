@@ -1,6 +1,6 @@
-import UIKit
 import Cartography
 import Photos
+import UIKit
 
 class PhotoDetailViewController: UIViewController {
     private let asset: PHAsset
@@ -12,40 +12,39 @@ class PhotoDetailViewController: UIViewController {
 
         super.init(nibName: nil, bundle: nil)
 
-        self.imageView.contentMode = .scaleAspectFit
-        self.imageView.backgroundColor = .white
-        self.imageView.accessibilityIgnoresInvertColors = true
-        self.view.backgroundColor = .white
+        imageView.contentMode = .scaleAspectFit
+        imageView.backgroundColor = .white
+        imageView.accessibilityIgnoresInvertColors = true
+        view.backgroundColor = .white
 
         let imageRequestOptions = PHImageRequestOptions()
         imageRequestOptions.isNetworkAccessAllowed = true
         imageRequestOptions.deliveryMode = .opportunistic
-        self.imageManager.requestImage(
+        imageManager.requestImage(
             for: asset,
-            targetSize: self.view.bounds.size.pixelSize,
+            targetSize: view.bounds.size.pixelSize,
             contentMode: .aspectFit,
             options: imageRequestOptions
-        ) { (image, _) in
+        ) { image, _ in
             self.imageView.image = image
         }
-
     }
 
-    required init?(coder aDecoder: NSCoder) {
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.title = "Photo Detail"
+        title = "Photo Detail"
 
-        self.view.addSubview(self.imageView)
-        constrain(self.imageView) {
+        view.addSubview(imageView)
+        constrain(imageView) {
             $0.edges == $0.superview!.edges
         }
 
-        self.configureDismissGesture()
+        configureDismissGesture()
     }
 
     private let dismissPanGesture = UIPanGestureRecognizer()
@@ -53,18 +52,18 @@ class PhotoDetailViewController: UIViewController {
     public weak var transitionController: PhotoDetailInteractiveDismissTransition?
 
     private func configureDismissGesture() {
-        self.view.addGestureRecognizer(self.dismissPanGesture)
-        self.dismissPanGesture.addTarget(self, action: #selector(dismissPanGestureDidChange(_:)))
+        view.addGestureRecognizer(dismissPanGesture)
+        dismissPanGesture.addTarget(self, action: #selector(dismissPanGestureDidChange(_:)))
     }
 
     @objc private func dismissPanGestureDidChange(_ gesture: UIPanGestureRecognizer) {
         // インタラクティブに却下するかどうかを決定し、Navigation Controllerに通知します。
         switch gesture.state {
         case .began:
-            self.isInteractivelyDismissing = true
-            self.navigationController?.popViewController(animated: true)
+            isInteractivelyDismissing = true
+            navigationController?.popViewController(animated: true)
         case .cancelled, .failed, .ended:
-            self.isInteractivelyDismissing = false
+            isInteractivelyDismissing = false
         case .changed, .possible:
             break
         @unknown default:
@@ -72,21 +71,21 @@ class PhotoDetailViewController: UIViewController {
         }
 
         // 画面遷移コントローラーも更新したい！
-        self.transitionController?.didPanWith(gestureRecognizer: gesture)
+        transitionController?.didPanWith(gestureRecognizer: gesture)
     }
 }
 
 extension PhotoDetailViewController: PhotoDetailTransitionAnimatorDelegate {
     func transitionWillStart() {
-        self.imageView.isHidden = true
+        imageView.isHidden = true
     }
 
     func transitionDidEnd() {
-        self.imageView.isHidden = false
+        imageView.isHidden = false
     }
 
     func referenceImage() -> UIImage? {
-        return self.imageView.image
+        return imageView.image
     }
 
     func imageFrame() -> CGRect? {

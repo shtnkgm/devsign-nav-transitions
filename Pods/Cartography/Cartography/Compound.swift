@@ -7,9 +7,9 @@
 //
 
 #if os(iOS) || os(tvOS)
-import UIKit
+    import UIKit
 #else
-import AppKit
+    import AppKit
 #endif
 
 public protocol Compound {
@@ -19,7 +19,7 @@ public protocol Compound {
 
 /// Compound properties conforming to this protocol can use the `==` operator
 /// with other compound properties of the same type.
-public protocol RelativeCompoundEquality: Compound { }
+public protocol RelativeCompoundEquality: Compound {}
 
 /// Declares a property equal to a the result of an expression.
 ///
@@ -45,7 +45,7 @@ public protocol RelativeCompoundEquality: Compound { }
 
 /// Compound properties conforming to this protocol can use the `<=` and `>=`
 /// operators with other compound properties of the same type.
-public protocol RelativeCompoundInequality: Compound { }
+public protocol RelativeCompoundInequality: Compound {}
 
 /// Declares a property less than or equal to another compound property.
 ///

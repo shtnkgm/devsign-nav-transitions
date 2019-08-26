@@ -19,7 +19,7 @@ public final class LayoutGuideProxy: SupportsPositioningLayoutProxy {
 
     public init(context: Context, item: LayoutGuide) {
         self.context = context
-        self.layoutGuide = item
+        layoutGuide = item
     }
 
     public var owningView: ViewProxy? {

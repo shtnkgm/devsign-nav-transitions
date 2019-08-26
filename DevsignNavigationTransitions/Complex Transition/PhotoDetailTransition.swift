@@ -2,7 +2,6 @@ import UIKit
 
 /// A way that view controllers can provide information about the photo-detail transition animation.
 public protocol PhotoDetailTransitionAnimatorDelegate: class {
-
     /// Called just-before the transition animation begins. Use this to prepare your VC for the transition.
     func transitionWillStart()
 
@@ -44,12 +43,11 @@ public class PhotoDetailPushTransition: NSObject, UIViewControllerAnimatedTransi
         self.photoDetailVC = photoDetailVC
     }
 
-    public func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
+    public func transitionDuration(using _: UIViewControllerContextTransitioning?) -> TimeInterval {
         return 0.38
     }
 
     public func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
-
         // As of 2014, you're meant to use .view(forKey:) instead of .viewController(forKey:).view to get the views.
         // It's not in the original 2013 WWDC talk, but it's in the 2014 one!
         let toView = transitionContext.view(forKey: .to)
@@ -62,24 +60,24 @@ public class PhotoDetailPushTransition: NSObject, UIViewControllerAnimatedTransi
             .compactMap { $0 }
             .forEach {
                 containerView.addSubview($0)
-        }
+            }
         let transitionImage = fromDelegate.referenceImage()!
         transitionImageView.image = transitionImage
         transitionImageView.frame = fromDelegate.imageFrame()
             ?? PhotoDetailPushTransition.defaultOffscreenFrameForPresentation(image: transitionImage, forView: toView!)
         let toReferenceFrame = PhotoDetailPushTransition.calculateZoomInImageFrame(image: transitionImage, forView: toView!)
-        containerView.addSubview(self.transitionImageView)
+        containerView.addSubview(transitionImageView)
 
-        self.fromDelegate.transitionWillStart()
-        self.photoDetailVC.transitionWillStart()
+        fromDelegate.transitionWillStart()
+        photoDetailVC.transitionWillStart()
 
-        let duration = self.transitionDuration(using: transitionContext)
+        let duration = transitionDuration(using: transitionContext)
         let spring: CGFloat = 0.95
         let animator = UIViewPropertyAnimator(duration: duration, dampingRatio: spring) {
             self.transitionImageView.frame = toReferenceFrame
             toView?.alpha = 1
         }
-        animator.addCompletion { (position) in
+        animator.addCompletion { position in
             assert(position == .end)
 
             self.transitionImageView.removeFromSuperview()
@@ -124,7 +122,7 @@ public class PhotoDetailPopTransition: NSObject, UIViewControllerAnimatedTransit
     init?(
         toDelegate: Any,
         fromPhotoDetailVC photoDetailVC: PhotoDetailViewController
-        ) {
+    ) {
         guard let toDelegate = toDelegate as? PhotoDetailTransitionAnimatorDelegate else {
             return nil
         }
@@ -133,7 +131,7 @@ public class PhotoDetailPopTransition: NSObject, UIViewControllerAnimatedTransit
         self.photoDetailVC = photoDetailVC
     }
 
-    public func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
+    public func transitionDuration(using _: UIViewControllerContextTransitioning?) -> TimeInterval {
         return 0.38
     }
 
@@ -153,15 +151,15 @@ public class PhotoDetailPopTransition: NSObject, UIViewControllerAnimatedTransit
             .forEach { containerView.addSubview($0) }
         containerView.addSubview(transitionImageView)
 
-        self.photoDetailVC.transitionWillStart()
-        self.toDelegate.transitionWillStart()
+        photoDetailVC.transitionWillStart()
+        toDelegate.transitionWillStart()
 
-        let duration = self.transitionDuration(using: transitionContext)
+        let duration = transitionDuration(using: transitionContext)
         let spring: CGFloat = 0.9
         let animator = UIViewPropertyAnimator(duration: duration, dampingRatio: spring) {
             fromView?.alpha = 0
         }
-        animator.addCompletion { (position) in
+        animator.addCompletion { position in
             assert(position == .end)
 
             self.transitionImageView.removeFromSuperview()
@@ -183,7 +181,7 @@ public class PhotoDetailPopTransition: NSObject, UIViewControllerAnimatedTransit
                     PhotoDetailPopTransition.defaultOffscreenFrameForDismissal(
                         transitionImageSize: fromReferenceFrame.size,
                         screenHeight: containerView.bounds.height
-                )
+                    )
                 self.transitionImageView.frame = toReferenceFrame
             }
         }

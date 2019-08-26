@@ -7,7 +7,7 @@ public extension CGFloat {
         value: CGFloat,
         inRange: (min: CGFloat, max: CGFloat),
         toRange: (min: CGFloat, max: CGFloat) = (min: 0.0, max: 1.0)
-        ) -> CGFloat {
+    ) -> CGFloat {
         assert(inRange.max > inRange.min)
         assert(toRange.max > toRange.min)
 
@@ -26,7 +26,7 @@ public extension CGSize {
     /// Scales up a point-size CGSize into its pixel representation.
     var pixelSize: CGSize {
         let scale = UIScreen.main.scale
-        return CGSize(width: self.width * scale, height: self.height * scale)
+        return CGSize(width: width * scale, height: height * scale)
     }
 }
 

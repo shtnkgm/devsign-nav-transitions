@@ -15,21 +15,22 @@ public protocol LayoutProxy: class {
 
 extension LayoutProxy {
     #if os(iOS) || os(tvOS)
-    internal func dimension(with attribute: NSLayoutConstraint.Attribute) -> Dimension {
-        return Dimension(context, item, attribute)
-    }
+        internal func dimension(with attribute: NSLayoutConstraint.Attribute) -> Dimension {
+            return Dimension(context, item, attribute)
+        }
 
-    internal func edge(with attribute: NSLayoutConstraint.Attribute) -> Edge {
-        return Edge(context, item, attribute)
-    }
+        internal func edge(with attribute: NSLayoutConstraint.Attribute) -> Edge {
+            return Edge(context, item, attribute)
+        }
+
     #elseif os(OSX)
-    internal func dimension(with attribute: NSLayoutConstraint.Attribute) -> Dimension {
-        return Dimension(context, item, attribute)
-    }
+        internal func dimension(with attribute: NSLayoutConstraint.Attribute) -> Dimension {
+            return Dimension(context, item, attribute)
+        }
 
-    internal func edge(with attribute: NSLayoutConstraint.Attribute) -> Edge {
-        return Edge(context, item, attribute)
-    }
+        internal func edge(with attribute: NSLayoutConstraint.Attribute) -> Edge {
+            return Edge(context, item, attribute)
+        }
     #endif
 
     internal func point(for attr1: Edge, _ attr2: Edge) -> Point {
@@ -53,11 +54,11 @@ extension SupportsTopLayoutProxy {
     }
 
     #if os(iOS) || os(tvOS)
-    /// The top margin of the item. iOS exclusive.
-    @available(iOS, introduced: 8.0)
-    public var topMargin: Edge {
-        return edge(with: .topMargin)
-    }
+        /// The top margin of the item. iOS exclusive.
+        @available(iOS, introduced: 8.0)
+        public var topMargin: Edge {
+            return edge(with: .topMargin)
+        }
     #endif
 }
 
@@ -69,11 +70,11 @@ extension SupportsBottomLayoutProxy {
     }
 
     #if os(iOS) || os(tvOS)
-    /// The bottom margin of the item. iOS exclusive.
-    @available(iOS, introduced: 8.0)
-    public var bottomMargin: Edge {
-        return edge(with: .bottomMargin)
-    }
+        /// The bottom margin of the item. iOS exclusive.
+        @available(iOS, introduced: 8.0)
+        public var bottomMargin: Edge {
+            return edge(with: .bottomMargin)
+        }
     #endif
 }
 
@@ -85,11 +86,11 @@ extension SupportsRightLayoutProxy {
     }
 
     #if os(iOS) || os(tvOS)
-    /// The right margin of the item. iOS exclusive.
-    @available(iOS, introduced: 8.0)
-    public var rightMargin: Edge {
-        return edge(with: .rightMargin)
-    }
+        /// The right margin of the item. iOS exclusive.
+        @available(iOS, introduced: 8.0)
+        public var rightMargin: Edge {
+            return edge(with: .rightMargin)
+        }
     #endif
 }
 
@@ -101,11 +102,11 @@ extension SupportsLeftLayoutProxy {
     }
 
     #if os(iOS) || os(tvOS)
-    /// The left margin of the item. iOS exclusive.
-    @available(iOS, introduced: 8.0)
-    public var leftMargin: Edge {
-        return edge(with: .leftMargin)
-    }
+        /// The left margin of the item. iOS exclusive.
+        @available(iOS, introduced: 8.0)
+        public var leftMargin: Edge {
+            return edge(with: .leftMargin)
+        }
     #endif
 }
 
@@ -117,11 +118,11 @@ extension SupportsLeadingLayoutProxy {
     }
 
     #if os(iOS) || os(tvOS)
-    /// The leading margin of the item. iOS exclusive.
-    @available(iOS, introduced: 8.0)
-    public var leadingMargin: Edge {
-        return edge(with: .leadingMargin)
-    }
+        /// The leading margin of the item. iOS exclusive.
+        @available(iOS, introduced: 8.0)
+        public var leadingMargin: Edge {
+            return edge(with: .leadingMargin)
+        }
     #endif
 }
 
@@ -133,11 +134,11 @@ extension SupportsTrailingLayoutProxy {
     }
 
     #if os(iOS) || os(tvOS)
-    /// The trailing margin of the item. iOS exclusive.
-    @available(iOS, introduced: 8.0)
-    public var trailingMargin: Edge {
-        return edge(with: .trailingMargin)
-    }
+        /// The trailing margin of the item. iOS exclusive.
+        @available(iOS, introduced: 8.0)
+        public var trailingMargin: Edge {
+            return edge(with: .trailingMargin)
+        }
     #endif
 }
 
@@ -150,13 +151,13 @@ extension SupportsEdgesLayoutProxy {
     }
 
     #if os(iOS) || os(tvOS)
-    /// All edges of the item with their respective margins. This property
-    /// affects `topMargin`, `bottomMargin`, `leadingMargin` and
-    /// `trailingMargin`.
-    @available(iOS, introduced: 8.0)
-    public var edgesWithinMargins: Edges {
-        return edges(for: topMargin, leadingMargin, bottomMargin, trailingMargin)
-    }
+        /// All edges of the item with their respective margins. This property
+        /// affects `topMargin`, `bottomMargin`, `leadingMargin` and
+        /// `trailingMargin`.
+        @available(iOS, introduced: 8.0)
+        public var edgesWithinMargins: Edges {
+            return edges(for: topMargin, leadingMargin, bottomMargin, trailingMargin)
+        }
     #endif
 }
 
@@ -168,11 +169,11 @@ extension SupportsCenterXLayoutProxy {
     }
 
     #if os(iOS) || os(tvOS)
-    /// The horizontal center within the margins of the item. iOS exclusive.
-    @available(iOS, introduced: 8.0)
-    public var centerXWithinMargins: Edge {
-        return edge(with: .centerXWithinMargins)
-    }
+        /// The horizontal center within the margins of the item. iOS exclusive.
+        @available(iOS, introduced: 8.0)
+        public var centerXWithinMargins: Edge {
+            return edge(with: .centerXWithinMargins)
+        }
     #endif
 }
 
@@ -184,11 +185,11 @@ extension SupportsCenterYLayoutProxy {
     }
 
     #if os(iOS) || os(tvOS)
-    /// The vertical center within the margins of the item. iOS exclusive.
-    @available(iOS, introduced: 8.0)
-    public var centerYWithinMargins: Edge {
-        return edge(with: .centerYWithinMargins)
-    }
+        /// The vertical center within the margins of the item. iOS exclusive.
+        @available(iOS, introduced: 8.0)
+        public var centerYWithinMargins: Edge {
+            return edge(with: .centerYWithinMargins)
+        }
     #endif
 }
 
@@ -201,12 +202,12 @@ extension SupportsCenteringLayoutProxy {
     }
 
     #if os(iOS) || os(tvOS)
-    /// The center point within the margins of the item. This property affects
-    /// `centerXWithinMargins` and `centerYWithinMargins`. iOS exclusive.
-    @available(iOS, introduced: 8.0)
-    public var centerWithinMargins: Point {
-        return point(for: centerXWithinMargins, centerYWithinMargins)
-    }
+        /// The center point within the margins of the item. This property affects
+        /// `centerXWithinMargins` and `centerYWithinMargins`. iOS exclusive.
+        @available(iOS, introduced: 8.0)
+        public var centerWithinMargins: Point {
+            return point(for: centerXWithinMargins, centerYWithinMargins)
+        }
     #endif
 }
 

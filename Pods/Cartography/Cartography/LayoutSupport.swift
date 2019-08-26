@@ -24,16 +24,12 @@ import Foundation
     }
 
     public extension UIViewController {
-        public var car_topLayoutGuide: LayoutSupport {
-            get {
-                return LayoutSupport(layoutGuide: self.topLayoutGuide)
-            }
+        var car_topLayoutGuide: LayoutSupport {
+            return LayoutSupport(layoutGuide: topLayoutGuide)
         }
 
-        public var car_bottomLayoutGuide: LayoutSupport {
-            get {
-                return LayoutSupport(layoutGuide: self.bottomLayoutGuide)
-            }
+        var car_bottomLayoutGuide: LayoutSupport {
+            return LayoutSupport(layoutGuide: bottomLayoutGuide)
         }
     }
 

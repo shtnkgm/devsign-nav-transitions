@@ -8,7 +8,7 @@
 
 #if os(iOS) || os(tvOS)
     import UIKit
-    #else
+#else
     import AppKit
 #endif
 
@@ -23,7 +23,7 @@
         return rest.reduce(([], first)) { (acc, current) -> ([NSLayoutConstraint], T) in
             let (constraints, previous) = acc
 
-            return (constraints + [ combine(previous, current) ], current)
+            return (constraints + [combine(previous, current)], current)
         }.0
     } else {
         return []
@@ -43,7 +43,7 @@
 
 @discardableResult public func distribute(by amount: CGFloat = 0.0, horizontally items: [SupportsLeadingLayoutProxy & SupportsTrailingLayoutProxy]) -> [NSLayoutConstraint] {
     return reduce(items.map(AnyHorizontalDistributionLayoutProxy.init)) {
-        return $0.trailing == $1.leading - amount
+        $0.trailing == $1.leading - amount
     }
 }
 
@@ -73,7 +73,7 @@
 ///
 @discardableResult public func distribute(by amount: CGFloat = 0.0, leftToRight items: [SupportsLeftLayoutProxy & SupportsRightLayoutProxy]) -> [NSLayoutConstraint] {
     return reduce(items.map(AnyLeftToRightDistributionLayoutProxy.init)) {
-        return $0.right == $1.left - amount
+        $0.right == $1.left - amount
     }
 }
 
@@ -103,7 +103,7 @@
 ///
 @discardableResult public func distribute(by amount: CGFloat = 0.0, vertically items: [SupportsTopLayoutProxy & SupportsBottomLayoutProxy]) -> [NSLayoutConstraint] {
     return reduce(items.map(AnyVerticalDistributionLayoutProxy.init)) {
-        return $0.bottom == $1.top - amount
+        $0.bottom == $1.top - amount
     }
 }
 

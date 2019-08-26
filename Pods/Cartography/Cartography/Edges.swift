@@ -7,9 +7,9 @@
 //
 
 #if os(iOS) || os(tvOS)
-import UIKit
+    import UIKit
 #else
-import AppKit
+    import AppKit
 #endif
 
 public struct Edges: Compound, RelativeCompoundEquality, RelativeCompoundInequality {
@@ -41,7 +41,7 @@ public struct Edges: Compound, RelativeCompoundEquality, RelativeCompoundInequal
                 Coefficients(1, top),
                 Coefficients(1, leading),
                 Coefficients(1, -bottom),
-                Coefficients(1, -trailing)
+                Coefficients(1, -trailing),
             ]
         )
     }
@@ -54,7 +54,7 @@ public struct Edges: Compound, RelativeCompoundEquality, RelativeCompoundInequal
     /// - returns: A new expression with the inseted edges.
     ///
     public func inseted(horizontally: CGFloat, vertically: CGFloat) -> Expression<Edges> {
-        return self.inseted(
+        return inseted(
             top: vertically,
             leading: horizontally,
             bottom: vertically,
@@ -69,7 +69,7 @@ public struct Edges: Compound, RelativeCompoundEquality, RelativeCompoundInequal
     /// - returns: A new expression with the inseted edges.
     ///
     public func inseted(horizontally: CGFloat) -> Expression<Edges> {
-        return self.inseted(
+        return inseted(
             horizontally: horizontally,
             vertically: 0
         )
@@ -82,7 +82,7 @@ public struct Edges: Compound, RelativeCompoundEquality, RelativeCompoundInequal
     /// - returns: A new expression with the inseted edges.
     ///
     public func inseted(vertically: CGFloat) -> Expression<Edges> {
-        return self.inseted(
+        return inseted(
             horizontally: 0,
             vertically: vertically
         )
@@ -95,27 +95,27 @@ public struct Edges: Compound, RelativeCompoundEquality, RelativeCompoundInequal
     /// - returns: A new expression with the inseted edges.
     ///
     public func inseted(by value: CGFloat) -> Expression<Edges> {
-        return self.inseted(
+        return inseted(
             horizontally: value,
             vertically: value
         )
     }
 
     #if os(iOS) || os(tvOS)
-    /// Insets all edges individually using an existing UIEdgeInsets.
-    ///
-    /// - parameter by: The UIEdgeInsets to use as a base value.
-    ///
-    /// - returns: A new expression with the inseted edges.
-    ///
-    public func inseted(by insets: UIEdgeInsets) -> Expression<Edges> {
-        return self.inseted(
-            top: insets.top,
-            leading: insets.left,
-            bottom: insets.bottom,
-            trailing: insets.right
-        )
-    }
+        /// Insets all edges individually using an existing UIEdgeInsets.
+        ///
+        /// - parameter by: The UIEdgeInsets to use as a base value.
+        ///
+        /// - returns: A new expression with the inseted edges.
+        ///
+        public func inseted(by insets: UIEdgeInsets) -> Expression<Edges> {
+            return inseted(
+                top: insets.top,
+                leading: insets.left,
+                bottom: insets.bottom,
+                trailing: insets.right
+            )
+        }
     #endif
 }
 
@@ -183,14 +183,14 @@ public func inset(_ edges: Edges, _ top: CGFloat, _ leading: CGFloat, _ bottom: 
 }
 
 #if os(iOS) || os(tvOS)
-/// Insets edges individually with UIEdgeInset.
-///
-/// - parameter edges:    The edges to inset.
-/// - parameter insets:   The amounts by which to inset all edges, in points via UIEdgeInsets.
-///
-/// - returns: A new expression with the inset edges.
-///
-public func inset(_ edges: Edges, _ insets: UIEdgeInsets) -> Expression<Edges> {
-    return edges.inseted(by: insets)
-}
+    /// Insets edges individually with UIEdgeInset.
+    ///
+    /// - parameter edges:    The edges to inset.
+    /// - parameter insets:   The amounts by which to inset all edges, in points via UIEdgeInsets.
+    ///
+    /// - returns: A new expression with the inset edges.
+    ///
+    public func inset(_ edges: Edges, _ insets: UIEdgeInsets) -> Expression<Edges> {
+        return edges.inseted(by: insets)
+    }
 #endif

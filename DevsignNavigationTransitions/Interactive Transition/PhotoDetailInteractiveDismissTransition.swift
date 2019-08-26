@@ -52,7 +52,7 @@ public class PhotoDetailInteractiveDismissTransition: NSObject {
         case .possible, .began:
             break
         case .cancelled, .failed:
-            self.completeTransition(didCancel: true)
+            completeTransition(didCancel: true)
 
         case .changed:
             transitionImageView.transform = CGAffineTransform.identity
@@ -60,14 +60,14 @@ public class PhotoDetailInteractiveDismissTransition: NSObject {
                 .translatedBy(x: translation.x, y: translation.y)
 
             transitionContext.updateInteractiveTransition(percentageComplete)
-            self.backgroundAnimation?.fractionComplete = percentageComplete
+            backgroundAnimation?.fractionComplete = percentageComplete
 
         case .ended:
             // Here, we decide whether to complete or cancel the transition.
             let fingerIsMovingDownwards = gestureRecognizer.velocity(in: nil).y > 0
             let transitionMadeSignificantProgress = percentageComplete > 0.1
             let shouldComplete = fingerIsMovingDownwards && transitionMadeSignificantProgress
-            self.completeTransition(didCancel: !shouldComplete)
+            completeTransition(didCancel: !shouldComplete)
         @unknown default:
             break
         }
@@ -111,7 +111,7 @@ public class PhotoDetailInteractiveDismissTransition: NSObject {
 
         // When the transition-image has moved into place, the animation completes,
         // and we close out the transition itself.
-        foregroundAnimation.addCompletion { [weak self] (_) in
+        foregroundAnimation.addCompletion { [weak self] _ in
             self?.transitionImageView.removeFromSuperview()
             self?.transitionImageView.image = nil
             self?.toDelegate?.transitionDidEnd()
@@ -150,11 +150,11 @@ public class PhotoDetailInteractiveDismissTransition: NSObject {
 }
 
 extension PhotoDetailInteractiveDismissTransition: UIViewControllerAnimatedTransitioning {
-    public func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
+    public func transitionDuration(using _: UIViewControllerContextTransitioning?) -> TimeInterval {
         return 0.3
     }
 
-    public func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
+    public func animateTransition(using _: UIViewControllerContextTransitioning) {
         // Never called; this is always an interactive transition.
         fatalError()
     }
@@ -183,11 +183,11 @@ extension PhotoDetailInteractiveDismissTransition: UIViewControllerInteractiveTr
 
         fromDelegate.transitionWillStart()
         toDelegate?.transitionWillStart()
-        self.fromReferenceImageViewFrame = fromImageFrame
+        fromReferenceImageViewFrame = fromImageFrame
 
         // We'll replace this with a better one during the transition,
         // because the collectionviews on the parent screen need a chance to re-layout.
-        self.toReferenceImageViewFrame = PhotoDetailPopTransition.defaultOffscreenFrameForDismissal(
+        toReferenceImageViewFrame = PhotoDetailPopTransition.defaultOffscreenFrameForDismissal(
             transitionImageSize: fromImageFrame.size,
             screenHeight: fromView.bounds.height
         )
@@ -210,7 +210,7 @@ extension PhotoDetailInteractiveDismissTransition: UIViewControllerInteractiveTr
                 fromView.alpha = 0
             }
         })
-        self.backgroundAnimation = animation
+        backgroundAnimation = animation
         toVC.locketTabBarController?.setTabBar(hidden: false, animated: true, alongside: animation)
     }
 }

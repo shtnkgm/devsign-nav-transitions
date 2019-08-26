@@ -7,13 +7,13 @@
 //
 
 #if os(iOS) || os(tvOS)
-import UIKit
+    import UIKit
 
-public typealias LayoutPriority = UILayoutPriority
+    public typealias LayoutPriority = UILayoutPriority
 #else
-import AppKit
+    import AppKit
 
-public typealias LayoutPriority = NSLayoutConstraint.Priority
+    public typealias LayoutPriority = NSLayoutConstraint.Priority
 #endif
 
 precedencegroup CarthographyPriorityPrecedence {
@@ -21,7 +21,7 @@ precedencegroup CarthographyPriorityPrecedence {
     higherThan: AssignmentPrecedence
 }
 
-infix operator  ~: CarthographyPriorityPrecedence
+infix operator ~: CarthographyPriorityPrecedence
 
 /// Sets the priority for a constraint.
 ///

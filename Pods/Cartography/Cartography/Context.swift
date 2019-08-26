@@ -7,13 +7,13 @@
 //
 
 #if os(iOS) || os(tvOS)
-import UIKit
+    import UIKit
 
-public typealias LayoutRelation = NSLayoutConstraint.Relation
+    public typealias LayoutRelation = NSLayoutConstraint.Relation
 #else
-import AppKit
+    import AppKit
 
-public typealias LayoutRelation = NSLayoutConstraint.Relation
+    public typealias LayoutRelation = NSLayoutConstraint.Relation
 #endif
 
 public class Context {
@@ -40,7 +40,7 @@ public class Context {
     internal func addConstraint(_ from: Compound, coefficients: [Coefficients]? = nil, to: Compound? = nil, relation: LayoutRelation = .equal) -> [NSLayoutConstraint] {
         var results: [NSLayoutConstraint] = []
 
-        for i in 0..<from.properties.count {
+        for i in 0 ..< from.properties.count {
             let n: Coefficients = coefficients?[i] ?? Coefficients()
 
             results.append(addConstraint(from.properties[i], to: to?.properties[i], coefficients: n, relation: relation))

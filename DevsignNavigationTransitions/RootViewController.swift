@@ -7,21 +7,21 @@ class RootViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
     }
 
-    required init?(coder aDecoder: NSCoder) {
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.tabController.willMove(toParent: self)
-        self.addChild(tabController)
-        self.view.addSubview(tabController.view)
-        self.tabController.didMove(toParent: self)
-        self.tabController.view.frame = self.view.bounds
-        self.tabController.view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+        tabController.willMove(toParent: self)
+        addChild(tabController)
+        view.addSubview(tabController.view)
+        tabController.didMove(toParent: self)
+        tabController.view.frame = view.bounds
+        tabController.view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
 
         let secondNavController = LocketNavigationController(rootViewController: PhotoGridViewController())
-        self.tabController.addChild(secondNavController)
+        tabController.addChild(secondNavController)
     }
 }

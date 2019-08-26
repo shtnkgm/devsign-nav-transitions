@@ -1,6 +1,6 @@
-import UIKit
-import Photos
 import Cartography
+import Photos
+import UIKit
 
 class PhotoGridViewController: UIViewController {
     private let collectionView: UICollectionView
@@ -26,37 +26,36 @@ class PhotoGridViewController: UIViewController {
         layout.itemSize = CGSize(width: 80, height: 80)
         layout.invalidateLayout()
 
-        self.collectionViewLayout = layout
+        collectionViewLayout = layout
         self.collectionView = collectionView
 
         let fetchOptions = PHFetchOptions()
         fetchOptions.fetchLimit = 100
         fetchOptions.sortDescriptors = [
-            NSSortDescriptor(key: "creationDate", ascending: false)
+            NSSortDescriptor(key: "creationDate", ascending: false),
         ]
-        self.fetchResult = PHAsset.fetchAssets(with: fetchOptions)
+        fetchResult = PHAsset.fetchAssets(with: fetchOptions)
 
         super.init(nibName: nil, bundle: nil)
 
-        self.title = "Complex"
-        self.tabBarItem.image = UIImage(named: "Complex")
+        title = "Complex"
+        tabBarItem.image = UIImage(named: "Complex")
 
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
-
     }
 
-    required init?(coder aDecoder: NSCoder) {
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.view.backgroundColor = .white
-        self.collectionView.backgroundColor = .white
+        view.backgroundColor = .white
+        collectionView.backgroundColor = .white
 
-        self.view.addSubview(collectionView)
+        view.addSubview(collectionView)
         constrain(collectionView) {
             $0.edges == $0.superview!.edges
         }
@@ -64,24 +63,24 @@ class PhotoGridViewController: UIViewController {
 }
 
 extension PhotoGridViewController: UICollectionViewDataSource {
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
+    func numberOfSections(in _: UICollectionView) -> Int {
         return 1
     }
 
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.fetchResult.count
+    func collectionView(_: UICollectionView, numberOfItemsInSection _: Int) -> Int {
+        return fetchResult.count
     }
 
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: PhotoGridCell.identifier, for: indexPath) as! PhotoGridCell
-        let asset = self.fetchResult[indexPath.row]
+    func collectionView(_: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoGridCell.identifier, for: indexPath) as! PhotoGridCell
+        let asset = fetchResult[indexPath.row]
         cell.asset = asset
-        self.imageManager.requestImage(
+        imageManager.requestImage(
             for: asset,
-            targetSize: self.collectionViewLayout.itemSize.pixelSize,
+            targetSize: collectionViewLayout.itemSize.pixelSize,
             contentMode: .aspectFill,
-            options: self.imageRequestOptions
-        ) { (image, _) in
+            options: imageRequestOptions
+        ) { image, _ in
             cell.setImage(image: image, fromAsset: asset)
         }
         return cell
@@ -89,11 +88,11 @@ extension PhotoGridViewController: UICollectionViewDataSource {
 }
 
 extension PhotoGridViewController: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let asset = self.fetchResult[indexPath.row]
-        self.lastSelectedIndexPath = indexPath
+    func collectionView(_: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let asset = fetchResult[indexPath.row]
+        lastSelectedIndexPath = indexPath
         let photoDetailVC = PhotoDetailViewController(asset: asset)
-        self.navigationController?.pushViewController(photoDetailVC, animated: true)
+        navigationController?.pushViewController(photoDetailVC, animated: true)
     }
 
     func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
@@ -110,12 +109,12 @@ extension PhotoGridViewController: UICollectionViewDelegate {
 extension PhotoGridViewController: PhotoDetailTransitionAnimatorDelegate {
     func transitionWillStart() {
         guard let lastSelected = self.lastSelectedIndexPath else { return }
-        self.collectionView.cellForItem(at: lastSelected)?.isHidden = true
+        collectionView.cellForItem(at: lastSelected)?.isHidden = true
     }
 
     func transitionDidEnd() {
         guard let lastSelected = self.lastSelectedIndexPath else { return }
-        self.collectionView.cellForItem(at: lastSelected)?.isHidden = false
+        collectionView.cellForItem(at: lastSelected)?.isHidden = false
     }
 
     func referenceImage() -> UIImage? {
@@ -137,6 +136,6 @@ extension PhotoGridViewController: PhotoDetailTransitionAnimatorDelegate {
             return nil
         }
 
-        return self.collectionView.convert(cell.frame, to: self.view)
+        return collectionView.convert(cell.frame, to: view)
     }
 }

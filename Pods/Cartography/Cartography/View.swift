@@ -17,6 +17,7 @@ import Foundation
             return ViewProxy(context: context, view: self)
         }
     }
+
 #else
     import AppKit
     public typealias View = NSView
